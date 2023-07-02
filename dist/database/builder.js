@@ -1,4 +1,3 @@
-"use strict";
 /*
     Alex Skunk, a discord bot.
     Copyright (C) 2023 RobotoSkunk <contact@robotoskunk.com>
@@ -16,17 +15,4 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-require("source-map-support/register");
-require("./env");
-const client_1 = __importDefault(require("./client"));
-const connection_1 = __importDefault(require("./database/connection"));
-(async () => {
-    client_1.default.database = new connection_1.default();
-    await client_1.default.database.testConnection();
-    await client_1.default.login(process.env.TOKEN);
-})();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=builder.js.map

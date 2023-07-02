@@ -1,25 +1,72 @@
 CREATE TABLE IF NOT EXISTS users (
-	id BIGINT PRIMARY KEY,
+	id TEXT PRIMARY KEY,
 	locale TEXT NOT NULL DEFAULT 'en_US',
+
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+
 CREATE TABLE IF NOT EXISTS user_spam_reports (
 	id UUID DEFAULT GEN_RANDOM_UUID() PRIMARY KEY,
-	victim BIGINT NOT NULL,
-	attacker BIGINT NOT NULL,
+	victim TEXT NOT NULL,
+	attacker TEXT NOT NULL,
 	reason TEXT NOT NULL,
+
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	FOREIGN KEY (victim) REFERENCES users(id) ON DELETE CASCADE,
 	FOREIGN KEY (attacker) REFERENCES users(id) ON DELETE CASCADE
 );
 
+
 CREATE TABLE IF NOT EXISTS guilds (
-	id BIGINT PRIMARY KEY,
+	id TEXT PRIMARY KEY,
+
 	locale TEXT NOT NULL DEFAULT 'en_US',
-	welcome_channel BIGINT,
-	log_channel BIGINT
+	use_locale BOOLEAN NOT NULL DEFAULT FALSE,
+
+	welcome_channel TEXT,
+	log_channel TEXT,
+
+	shop_enabled BOOLEAN NOT NULL DEFAULT FALSE,
+
+	currency_name TEXT,
+	currency_name_plural TEXT,
+	currency_symbol TEXT
 );
+
+
+CREATE TABLE IF NOT EXISTS guild_shop_items (
+	id UUID DEFAULT GEN_RANDOM_UUID() PRIMARY KEY,
+	guild_id TEXT NOT NULL,
+
+	name TEXT NOT NULL,
+	description TEXT NOT NULL,
+
+	price MONEY NOT NULL,
+	role TEXT NOT NULL,
+	expiration_days SMALLINT NOT NULL,
+
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (guild_id) REFERENCES guilds(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS captcha_tokens (
+	id UUID TEXT NOT NULL PRIMARY KEY,
+	user_id TEXT NOT NULL,
+	guild_id TEXT NOT NULL,
+	token TEXT NOT NULL,
+
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	expires_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP + INTERVAL '5 minutes',
+
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY (guild_id) REFERENCES guilds(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS captcha_tokens_expires_at_idx ON captcha_tokens (expires_at);
+
 
 
