@@ -34,9 +34,7 @@ const client = new discord_js_1.default.Client({
         discord_js_1.default.IntentsBitField.Flags.GuildMessages |
         discord_js_1.default.IntentsBitField.Flags.GuildMessageReactions |
         discord_js_1.default.IntentsBitField.Flags.DirectMessages |
-        discord_js_1.default.IntentsBitField.Flags.DirectMessageReactions |
-        discord_js_1.default.IntentsBitField.Flags.GuildMembers |
-        discord_js_1.default.IntentsBitField.Flags.MessageContent
+        discord_js_1.default.IntentsBitField.Flags.DirectMessageReactions
 });
 client.commands = new discord_js_1.default.Collection();
 exports.default = client;

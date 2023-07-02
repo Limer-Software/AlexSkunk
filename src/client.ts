@@ -31,9 +31,7 @@ const client = new Discord.Client({
 		Discord.IntentsBitField.Flags.GuildMessages |
 		Discord.IntentsBitField.Flags.GuildMessageReactions |
 		Discord.IntentsBitField.Flags.DirectMessages |
-		Discord.IntentsBitField.Flags.DirectMessageReactions |
-		Discord.IntentsBitField.Flags.GuildMembers |
-		Discord.IntentsBitField.Flags.MessageContent
+		Discord.IntentsBitField.Flags.DirectMessageReactions
 });
 
 client.commands = new Discord.Collection();
