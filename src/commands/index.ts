@@ -16,10 +16,10 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import hi from './testing/hi';
+import _emoji_ from './analysis/emoji';
 
 const commands: RSDiscord.RootCommand[] = [
-	hi
+	_emoji_
 ];
 
 

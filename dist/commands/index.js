@@ -20,9 +20,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const hi_1 = __importDefault(require("./testing/hi"));
+const emoji_1 = __importDefault(require("./analysis/emoji"));
 const commands = [
-    hi_1.default
+    emoji_1.default
 ];
 // Load commands
 const discord_js_1 = require("discord.js");

@@ -50,6 +50,7 @@
 		"pg": "^8.11.1",
 		"rate-limiter-flexible": "^2.4.1",
 		"source-map-support": "^0.5.21",
+		"twemoji": "^14.0.2",
 		"winston": "^3.9.0"
 	},
 	"devDependencies": {
