@@ -53,6 +53,7 @@
 		"winston": "^3.9.0"
 	},
 	"devDependencies": {
-		"@types/pg": "^8.10.2"
+		"@types/pg": "^8.10.2",
+		"@types/source-map-support": "^0.5.6"
 	}
 }

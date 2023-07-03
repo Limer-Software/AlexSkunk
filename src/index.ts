@@ -28,5 +28,12 @@ import Database from './database/connection';
 	await client.database.testConnection();
 
 
+
+	// #region Events
+	import('./events/interactionCreate');
+	// import('./events/messageCreate');
+	// #endregion
+
+
 	await client.login(process.env.TOKEN);
 })();

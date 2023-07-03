@@ -18,7 +18,8 @@
 
 import PostgreSQL from 'pg';
 
-class Database {
+class Database
+{
 	/**
 	 * Database connection pool
 	 */
@@ -28,7 +29,8 @@ class Database {
 	/**
 	 * Create a new database connection pool based on environment variables
 	 */
-	constructor() {
+	constructor()
+	{
 		this.pool = new PostgreSQL.Pool({
 			database: process.env.DB_NAME,
 			host: process.env.DB_HOST,
@@ -41,7 +43,8 @@ class Database {
 	/**
 	 * Test the database connection
 	 */
-	public async testConnection(): Promise<void> {
+	public async testConnection(): Promise<void>
+	{
 		try {
 			await this.pool.query('SELECT NOW()');
 			console.log('Connected to database');
@@ -56,7 +59,8 @@ class Database {
 	 * Get a client from the connection pool
 	 * @returns A client from the connection pool
 	 */
-	public async connect(): Promise<PostgreSQL.PoolClient> {
+	public async connect(): Promise<PostgreSQL.PoolClient>
+	{
 		return this.pool.connect();
 	}
 }
