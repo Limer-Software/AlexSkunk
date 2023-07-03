@@ -30,7 +30,7 @@ declare module 'discord.js'
 {
 	interface Client
 	{
-		commands: Collection<string, RSDiscord.RootCommand>;
+		commands: Collection<string, RSDiscord.Command>;
 		database: Database;
 	}
 }

@@ -21,8 +21,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const emoji_1 = __importDefault(require("./analysis/emoji"));
+const color_1 = __importDefault(require("./analysis/color"));
 const commands = [
-    emoji_1.default
+    emoji_1.default,
+    color_1.default
 ];
 // Load commands
 const discord_js_1 = require("discord.js");

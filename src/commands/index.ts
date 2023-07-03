@@ -17,9 +17,11 @@
 */
 
 import _emoji_ from './analysis/emoji';
+import _color_ from './analysis/color';
 
-const commands: RSDiscord.RootCommand[] = [
-	_emoji_
+const commands: RSDiscord.Command[] = [
+	_emoji_,
+	_color_
 ];
 
 

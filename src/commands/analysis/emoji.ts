@@ -74,7 +74,7 @@ const command: RSDiscord.RootCommand = {
 					await interaction.reply({
 						'embeds': [{
 							'title': `Viewing emoji \`${guildEmoji.name}\``,
-							'color': color,
+							'color': color || null,
 							'thumbnail': {
 								'url': guildEmoji.url
 							},
@@ -87,12 +87,15 @@ const command: RSDiscord.RootCommand = {
 								}, {
 									'name': 'Created at',
 									'value': `<t:${Math.floor(guildEmoji.createdTimestamp / 1000)}:R>`,
+									'inline': true
 								}, {
 									'name': 'Created by',
 									'value': (await guildEmoji.fetchAuthor()).toString(),
+									'inline': false
 								}, {
 									'name': 'Animated',
 									'value': `\`${guildEmoji.animated ? 'Yes' : 'No'}\``,
+									'inline': false
 								}
 							]
 						}]
@@ -109,7 +112,7 @@ const command: RSDiscord.RootCommand = {
 			await interaction.reply({
 				'embeds': [{
 					'title': 'Emoji',
-					'color': color,
+					'color': color || null,
 					'description': 'As this emoji is not in this server, I only have limited information about it.'
 						+ '\n\n'
 						+ `[Click here to download](${emojiUrl})`,
@@ -147,7 +150,7 @@ const command: RSDiscord.RootCommand = {
 			'embeds': [
 				{
 					'title': `Viewing emoji \`${emoji}\``,
-					'color': color,
+					'color': color || null,
 					'description': `[Click here to download](${emojiUrl})`,
 					'thumbnail': {
 						'url': emojiUrl
@@ -160,11 +163,12 @@ const command: RSDiscord.RootCommand = {
 						}, {
 							'name': 'Unicode hex',
 							'value': `\`${twemoji.convert.toCodePoint(emoji)}\``,
+							'inline': true
 						}
 					]
 				}, {
 					'title': 'HTML Code',
-					'color': color,
+					'color': color || null,
 					'description': '**PNG**\n'
 						+ `\`\`\`html\n${parsedEmoji}\`\`\`\n`
 						+ '\n**SVG**\n'
