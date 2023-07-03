@@ -16,17 +16,18 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = __importDefault(require("../client"));
-client_1.default.on('messageCreate', async (message) => {
-    if (message.author.bot) {
-        return;
+const discord_js_1 = require("discord.js");
+const data = new discord_js_1.SlashCommandBuilder();
+data.setName('hi');
+data.setNameLocalization('es-ES', 'hola');
+data.setDescription('Says hi to you.');
+data.setDescriptionLocalization('es-ES', 'Te saluda.');
+const command = {
+    data,
+    async execute(interaction) {
+        await interaction.reply('Hi!');
     }
-    await message.reply('Mrrrrr!');
-});
-// Null export to keep the TS module system happy
-exports.default = null;
-//# sourceMappingURL=messageCreate.js.map
+};
+exports.default = command;
+//# sourceMappingURL=hi.js.map

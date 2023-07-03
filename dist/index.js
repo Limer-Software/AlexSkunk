@@ -50,10 +50,12 @@ const connection_1 = __importDefault(require("./database/connection"));
 (async () => {
     client_1.default.database = new connection_1.default();
     await client_1.default.database.testConnection();
-    // #region Events
-    Promise.resolve().then(() => __importStar(require('./events/interactionCreate')));
-    // import('./events/messageCreate');
-    // #endregion
+    // Load events
+    await Promise.resolve().then(() => __importStar(require('./events/interactionCreate')));
+    // Load commands
+    await Promise.resolve().then(() => __importStar(require('./commands')));
+    // Login
     await client_1.default.login(process.env.TOKEN);
+    console.log('Logged in.');
 })();
 //# sourceMappingURL=index.js.map

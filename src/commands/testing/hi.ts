@@ -16,26 +16,24 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'source-map-support/register';
-import './env';
-
-import client from './client';
-import Database from './database/connection';
+import { SlashCommandBuilder } from "discord.js";
 
 
-(async () => {
-	client.database = new Database();
-	await client.database.testConnection();
+const data = new SlashCommandBuilder();
+
+data.setName('hi');
+data.setNameLocalization('es-ES', 'hola');
+
+data.setDescription('Says hi to you.');
+data.setDescriptionLocalization('es-ES', 'Te saluda.');
 
 
-	// Load events
-	await import('./events/interactionCreate');
+const command: RSDiscord.RootCommand = {
+	data,
+	async execute(interaction) {
+		await interaction.reply('Hi!');
+	}
+};
 
-	// Load commands
-	await import('./commands');
 
-
-	// Login
-	await client.login(process.env.TOKEN);
-	console.log('Logged in.');
-})();
+export default command;

@@ -30,12 +30,13 @@ declare module 'discord.js'
 {
 	interface Client
 	{
-		commands: Collection<string, RSDiscord.Command>;
+		commands: Collection<string, RSDiscord.RootCommand>;
 		database: Database;
 	}
 }
 
 declare global {
+
 	namespace RSDiscord
 	{
 		type Command = RootCommand | SubCommand;
@@ -43,14 +44,13 @@ declare global {
 		interface RootCommand
 		{
 			data: SlashCommandBuilder;
-			execute: (interaction: ChatInputCommandInteraction<CacheType>) => void;
-			loader?(): Promise<void>;
+			execute: (interaction: ChatInputCommandInteraction<CacheType>) => Promise<void>;
 		}
 	
 		interface SubCommand
 		{
 			data: SlashCommandSubcommandBuilder;
-			execute: (interaction: ChatInputCommandInteraction<CacheType>) => void;
+			execute: (interaction: ChatInputCommandInteraction<CacheType>) => Promise<void>;
 		}
 	}
 
