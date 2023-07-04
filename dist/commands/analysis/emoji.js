@@ -23,6 +23,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const twemoji_1 = __importDefault(require("twemoji"));
 const guildEmojiRegex = /<a?:\w+:(\d+)>/;
+const wordLetterRegex = /\w/g;
+// const unicodeEmojiRegex = /(\p{Emoji}+)/u;
 const data = new discord_js_1.SlashCommandBuilder();
 data.setName('emoji');
 data.setDescription('Get information about an emoji.');
@@ -109,23 +111,25 @@ const command = {
             color = interaction.guild.members.me.displayColor;
         }
         // Check if it's a unicode emoji
-        const parsedEmoji = twemoji_1.default.parse(emoji);
-        if (parsedEmoji === emoji) {
+        if (wordLetterRegex.test(emoji)) {
             await interaction.reply({
                 'content': 'Please provide a valid emoji.',
                 'ephemeral': true
             });
             return;
         }
-        const emojiUrl = parsedEmoji.match(/src="([^"]+)"/)[1];
-        const parsedEmojiSVG = twemoji_1.default.parse(emoji, {
+        var unicodeEmoji = emoji;
+        // var unicodeEmoji = unicodeEmojiRegex.exec(emoji)[0];
+        const parsedEmoji = twemoji_1.default.parse(unicodeEmoji);
+        const parsedEmojiSVG = twemoji_1.default.parse(unicodeEmoji, {
             'folder': 'svg',
             'ext': '.svg'
         });
+        const emojiUrl = parsedEmoji.match(/src="([^"]+)"/)[1];
         await interaction.reply({
             'embeds': [
                 {
-                    'title': `Viewing emoji \`${emoji}\``,
+                    'title': `Viewing emoji \`${unicodeEmoji}\``,
                     'color': color || null,
                     'description': `[Click here to download](${emojiUrl})`,
                     'thumbnail': {
@@ -133,12 +137,12 @@ const command = {
                     },
                     'fields': [
                         {
-                            'name': 'Unicode',
-                            'value': `\`${emoji}\``,
+                            'name': 'Raw',
+                            'value': `\`${unicodeEmoji}\``,
                             'inline': true
                         }, {
                             'name': 'Unicode hex',
-                            'value': `\`${twemoji_1.default.convert.toCodePoint(emoji)}\``,
+                            'value': `\`${twemoji_1.default.convert.toCodePoint(unicodeEmoji)}\``,
                             'inline': true
                         }
                     ]

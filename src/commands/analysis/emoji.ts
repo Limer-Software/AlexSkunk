@@ -21,6 +21,8 @@ import twemoji from "twemoji";
 
 
 const guildEmojiRegex = /<a?:\w+:(\d+)>/;
+const wordLetterRegex = /\w/g;
+// const unicodeEmojiRegex = /(\p{Emoji}+)/u;
 
 const data = new SlashCommandBuilder();
 
@@ -129,10 +131,10 @@ const command: RSDiscord.RootCommand = {
 			color = interaction.guild.members.me.displayColor;
 		}
 
-		// Check if it's a unicode emoji
-		const parsedEmoji = twemoji.parse(emoji);
 
-		if (parsedEmoji === emoji) {
+		// Check if it's a unicode emoji
+
+		if (wordLetterRegex.test(emoji)) {
 			await interaction.reply({
 				'content': 'Please provide a valid emoji.',
 				'ephemeral': true
@@ -140,16 +142,21 @@ const command: RSDiscord.RootCommand = {
 			return;
 		}
 
-		const emojiUrl = parsedEmoji.match(/src="([^"]+)"/)[1];
-		const parsedEmojiSVG = twemoji.parse(emoji, {
+		var unicodeEmoji = emoji;
+		// var unicodeEmoji = unicodeEmojiRegex.exec(emoji)[0];
+
+		const parsedEmoji = twemoji.parse(unicodeEmoji);
+		const parsedEmojiSVG = twemoji.parse(unicodeEmoji, {
 			'folder': 'svg',
 			'ext': '.svg'
 		});
 
+		const emojiUrl = parsedEmoji.match(/src="([^"]+)"/)[1];
+
 		await interaction.reply({
 			'embeds': [
 				{
-					'title': `Viewing emoji \`${emoji}\``,
+					'title': `Viewing emoji \`${unicodeEmoji}\``,
 					'color': color || null,
 					'description': `[Click here to download](${emojiUrl})`,
 					'thumbnail': {
@@ -157,12 +164,12 @@ const command: RSDiscord.RootCommand = {
 					},
 					'fields': [
 						{
-							'name': 'Unicode',
-							'value': `\`${emoji}\``,
+							'name': 'Raw',
+							'value': `\`${unicodeEmoji}\``,
 							'inline': true
 						}, {
 							'name': 'Unicode hex',
-							'value': `\`${twemoji.convert.toCodePoint(emoji)}\``,
+							'value': `\`${twemoji.convert.toCodePoint(unicodeEmoji)}\``,
 							'inline': true
 						}
 					]
