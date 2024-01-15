@@ -12,7 +12,7 @@ There are a few characteristics that I want to implement in this bot:
 - [ ] A custom role shop for each server with their own currency.
 - [ ] An appealing system for banned users.
 - [ ] A custom music player with a queue system.
-- [ ] Emoji analysis (even built-in emojis).
+- [x] Emoji analysis (even built-in emojis).
 - [ ] A captcha system for new users (easier and more secure than CaptchaBot).
 - [ ] An advanced detection system to prevent raiders from joining.
 - [ ] A warning log for each user.
