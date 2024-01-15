@@ -16,7 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import client from "../client";
+import client from '../client';
 
 
 client.on('messageCreate', async message =>

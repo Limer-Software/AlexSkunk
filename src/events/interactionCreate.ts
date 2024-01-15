@@ -16,8 +16,8 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { ApplicationCommandType, InteractionType } from "discord.js";
-import client from "../client";
+import { ApplicationCommandType, InteractionType } from 'discord.js';
+import client from '../client';
 
 
 client.on('interactionCreate', async interaction =>

@@ -16,8 +16,8 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from "discord.js";
-import GenerateColorEmbed from "./__generator__";
+import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
+import GenerateColorEmbed from './__generator__';
 
 
 const hexColorRegex = /^#([0-9a-f]{6})$/i;

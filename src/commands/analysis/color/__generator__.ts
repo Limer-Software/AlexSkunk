@@ -16,7 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { InteractionReplyOptions } from "discord.js";
+import { InteractionReplyOptions } from 'discord.js';
 
 export default function GenerateColorEmbed(color: number): InteractionReplyOptions {
 	const rgb = {

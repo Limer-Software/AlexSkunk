@@ -16,8 +16,8 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { GuildEmoji, SlashCommandBuilder } from "discord.js";
-import twemoji from "twemoji";
+import { GuildEmoji, SlashCommandBuilder } from 'discord.js';
+import twemoji from 'twemoji';
 
 
 const guildEmojiRegex = /<a?:\w+:(\d+)>/;
