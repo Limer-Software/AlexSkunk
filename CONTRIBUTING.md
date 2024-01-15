@@ -1,5 +1,6 @@
 # Contribution Guidelines
-All contributions are welcome! If you want to contribute, please read the following guidelines.
+All contributions are welcome! If you want to contribute, please read the
+following guidelines.
 
 ## How to contribute
 If you want to contribute, you can do it in many ways:
@@ -9,7 +10,8 @@ If you want to contribute, you can do it in many ways:
 - [Donate](#donate)
 
 ### Bugs and feature requests
-If you find a bug or you want to request a new feature, please open an issue with the corresponding label.
+If you find a bug or you want to request a new feature, please open an issue
+with the corresponding label.
 
 Just make sure that the bug or feature request doesn't already exist.
 
@@ -19,12 +21,15 @@ If you want to improve the code, you can do it in many ways:
 - Adding new features
 - Improving the code quality
 
-And we really need a better code quality because the code is not suitable for development.
+And we really need a better code quality because the code is not suitable for
+development.
 Just remember to follow the [code style](CODING_STYLE.md) and the best practices.
 
 ### Translate the bot
-At the moment, there's no way to translate the bot. A translation system is planned, but it's not ready yet.
+At the moment, there's no way to translate the bot. A translation system is
+planned, but it's not ready yet.
 
 ### Donate
-If you want to donate, please go to [robotoskunk.com](https://robotoskunk.com/) and scroll down to the footer.
+If you want to donate, please go to [robotoskunk.com](https://robotoskunk.com/)
+and scroll down to the footer.
 There you'll find some donation buttons.
