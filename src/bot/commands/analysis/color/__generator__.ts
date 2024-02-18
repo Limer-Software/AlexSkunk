@@ -1,6 +1,6 @@
 /*
 	Alex Skunk, a discord bot.
-	Copyright (C) 2023 RobotoSkunk <contact@robotoskunk.com>
+	Copyright (C) 2024 RobotoSkunk <contact@robotoskunk.com>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published
@@ -16,9 +16,12 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { InteractionReplyOptions } from 'discord.js';
+import { AttachmentBuilder, InteractionReplyOptions } from 'discord.js';
 
-export default function GenerateColorEmbed(color: number): InteractionReplyOptions {
+import Canvas from '@napi-rs/canvas';
+
+
+export default async function GenerateColorEmbed(color: number): Promise<InteractionReplyOptions> {
 	const rgb = {
 		r: (color >> 16) & 0xFF,
 		g: (color >> 8) & 0xFF,
@@ -40,20 +43,39 @@ export default function GenerateColorEmbed(color: number): InteractionReplyOptio
 
 	const hex = color.toString(16).padStart(6, '0').toUpperCase();
 
+	const canvas = Canvas.createCanvas(300, 250);
+	const context = canvas.getContext('2d');
+
+	context.fillStyle = `#${hex}`;
+	context.rect(0, 0, 300, 250);
+	context.fill();
+
+	context.textAlign = 'center';
+	context.font = '65px';
+	context.fillStyle = hsv.v / hsv.s < 0.5 ? '#ffffff' : '#000000';
+	context.fillText(`#${hex}`, 150, 150);
+
+
+	const filename = `color-${hex}.png`
+	const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: filename });
+
 
 	return {
-		'embeds': [{
-			'title': `Color #${hex}`,
-			'description':
+		embeds: [{
+			title: `Color #${hex}`,
+			description:
 				`**HSV**: \`${hsv.h}°, ${hsv.s}%, ${hsv.v}%\`\n` +
 				`**RGB**: \`${rgb.r}, ${rgb.g}, ${rgb.b}\`\n` +
 				`**CMYK**: \`${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%\`\n` +
 				`**HEX**: \`#${hex}\`\n` +
 				`**Decimal**: \`${color}\``,
-			'color': color,
-			'image': {
-				'url': `https://dummyimage.com/300x250/${hex}/.png&text=${encodeURIComponent(`#${hex}`)}`
+			color: color,
+			image: {
+				url: `attachment://${filename}`
 			}
-		}]
+		}],
+		files: [
+			attachment
+		]
 	};
 }

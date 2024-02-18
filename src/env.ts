@@ -1,6 +1,6 @@
 /*
 	Alex Skunk, a discord bot.
-	Copyright (C) 2023 RobotoSkunk <contact@robotoskunk.com>
+	Copyright (C) 2024 RobotoSkunk <contact@robotoskunk.com>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published
@@ -48,4 +48,4 @@ if (process.env.PORT && Number.isNaN(Number.parseInt(process.env.PORT))) {
 	process.exit(1);
 }
 
-console.log(process.env.NODE_ENV === 'production' ? `Running in production mode` : 'Running in development mode');
+console.log(`Executed in ${process.env.NODE_ENV} mode.`);
