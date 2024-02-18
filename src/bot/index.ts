@@ -29,6 +29,12 @@ export default async function startBot()
 
 
 	// Login
-	await client.login(process.env.TOKEN);
-	console.log('Connected to Discord.');
+	try {
+		await client.login(process.env.TOKEN);
+		console.log('Connected to Discord.');
+
+	} catch (error) {
+		console.error(error);
+		process.exit(2);
+	}
 }
