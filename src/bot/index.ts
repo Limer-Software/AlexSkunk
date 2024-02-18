@@ -1,6 +1,6 @@
 /*
 	Alex Skunk, a discord bot.
-	Copyright (C) 2023 RobotoSkunk <contact@robotoskunk.com>
+	Copyright (C) 2024 RobotoSkunk <contact@robotoskunk.com>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published
@@ -19,15 +19,16 @@
 import client from '../client';
 
 
-client.on('messageCreate', async message =>
+export default async function startBot()
 {
-	if (message.author.bot) {
-		return;
-	}
+	// Load events
+	await import('./events/interactionCreate.js');
 
-	await message.reply('Mrrrrr!');
-});
+	// Load commands
+	await import('./commands/index.js');
 
 
-// Null export to keep the TS module system happy
-export default null;
+	// Login
+	await client.login(process.env.TOKEN);
+	console.log('Connected to Discord.');
+}

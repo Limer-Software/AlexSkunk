@@ -1,6 +1,6 @@
 /*
 	Alex Skunk, a discord bot.
-	Copyright (C) 2023 RobotoSkunk <contact@robotoskunk.com>
+	Copyright (C) 2024 RobotoSkunk <contact@robotoskunk.com>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published
@@ -30,8 +30,8 @@ import { REST, Routes } from 'discord.js';
 
 import crypto from 'crypto';
 
-import Cache from '../cache';
-import client from '../client';
+import Cache from '../../cache';
+import client from '../../client';
 
 
 const hashStream = crypto.createHash('sha256');

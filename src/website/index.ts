@@ -16,21 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'source-map-support/register';
-import './env';
-
-import Database from './database/connection';
-import client from './client';
-
-import startBot from './bot/index';
-import startWebsite from './website/index';
-
-
-(async () =>
+export default async function startWebsite()
 {
-	client.database = new Database();
-	await client.database.testConnection();
-
-	await startBot();
-	await startWebsite();
-})();
+	console.log('Website launched.');
+}
