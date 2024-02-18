@@ -1,20 +1,28 @@
 {
-	"compileOnSave": true,
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Node 21",
+	"_version": "21.0.0",  
+
 	"compilerOptions": {
 		"outDir": "dist",
+		
+		"lib": [ "Es2023" ],
+		"module": "Node16",
 		"target": "ES2022",
-		"allowJs": true,
-		"module": "commonjs",
+
+		"moduleResolution": "Node16",
+
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"moduleResolution": "node",
-		"sourceMap": true,
-		"declaration": true
+		"skipLibCheck": true,
+
+		"forceConsistentCasingInFileNames": true,
+
+		"removeComments": true,
+		"sourceMap": true
 	},
+
 	"include": [
 		"src/**/*"
-	],
-	"exclude": [
-		"node_modules"
 	]
 }

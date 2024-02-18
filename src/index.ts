@@ -29,10 +29,10 @@ import Database from './database/connection';
 
 
 	// Load events
-	await import('./events/interactionCreate');
+	await import('./events/interactionCreate.js');
 
 	// Load commands
-	await import('./commands');
+	await import('./commands/index.js');
 
 
 	// Login
