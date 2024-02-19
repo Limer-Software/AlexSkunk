@@ -18,7 +18,6 @@
 
 import { AttachmentBuilder, InteractionReplyOptions } from 'discord.js';
 
-import Canvas from '@napi-rs/canvas';
 import Color from '../../../../utils/color';
 
 
