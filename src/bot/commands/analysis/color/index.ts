@@ -24,9 +24,6 @@ import _random_ from './random';
 import _pick_ from './pick';
 
 
-const hexColorRegex = /^#([0-9a-f]{6})$/i;
-
-
 const data = new SlashCommandBuilder();
 
 data.setName('color');
@@ -49,7 +46,8 @@ subCommands.set(_pick_.data.name, _pick_);
 
 const command: RSDiscord.RootCommand = {
 	data,
-	async execute(interaction) {
+	async execute(interaction)
+	{
 		const subcommandName = interaction.options.getSubcommand();
 
 		const subcommand = subCommands.get(subcommandName);

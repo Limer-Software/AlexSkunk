@@ -52,7 +52,8 @@ data.addStringOption(option => {
 
 const command: RSDiscord.RootCommand = {
 	data,
-	async execute(interaction) {
+	async execute(interaction)
+	{
 		const emoji = interaction.options.getString('emoji', true);
 		var color: number;
 

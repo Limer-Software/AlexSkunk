@@ -32,7 +32,8 @@ data.setDescriptionLocalizations({
 	'es-ES': 'Obtén información sobre un color.'
 });
 
-data.addStringOption(option => {
+data.addStringOption(option =>
+{
 	option.setName('color');
 
 	option.setDescription('The color to get information about.');
@@ -48,7 +49,8 @@ data.addStringOption(option => {
 
 const command: RSDiscord.SubCommand = {
 	data,
-	async execute(interaction) {
+	async execute(interaction)
+	{
 		const color = interaction.options.getString('color', true);
 		var colorValue: number;
 

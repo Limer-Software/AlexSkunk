@@ -16,11 +16,8 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SlashCommandBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
+import { SlashCommandSubcommandBuilder } from 'discord.js';
 import GenerateColorEmbed from './__generator__';
-
-
-const hexColorRegex = /^#([0-9a-f]{6})$/i;
 
 
 const data = new SlashCommandSubcommandBuilder();
@@ -35,7 +32,8 @@ data.setDescriptionLocalizations({
 
 const command: RSDiscord.SubCommand = {
 	data,
-	async execute(interaction) {
+	async execute(interaction)
+	{
 		const colorValue = Math.floor(Math.random() * 0xFFFFFF);
 
 		await interaction.reply(await GenerateColorEmbed(colorValue));
