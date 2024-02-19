@@ -54,8 +54,10 @@ declare global {
 		}
 	}
 
-	namespace NodeJS {
-		interface ProcessEnv {
+	namespace NodeJS
+	{
+		interface ProcessEnv
+		{
 			TOKEN: string;
 			APP_ID: string;
 
@@ -74,5 +76,27 @@ declare global {
 			NODE_ENV?: 'development' | 'production';
 			PORT?: string;
 		}
+	}
+
+	interface ColorRGB
+	{
+		r: number,
+		g: number,
+		b: number
+	}
+
+	interface ColorHSV
+	{
+		h: number,
+		s: number,
+		v: number
+	}
+
+	interface ColorCMYK
+	{
+		c: number,
+		m: number,
+		y: number,
+		k: number
 	}
 }

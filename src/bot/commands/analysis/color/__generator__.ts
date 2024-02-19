@@ -19,47 +19,25 @@
 import { AttachmentBuilder, InteractionReplyOptions } from 'discord.js';
 
 import Canvas from '@napi-rs/canvas';
+import Color from '../../../../utils/color';
 
 
-export default async function GenerateColorEmbed(color: number): Promise<InteractionReplyOptions> {
-	const rgb = {
-		r: (color >> 16) & 0xFF,
-		g: (color >> 8) & 0xFF,
-		b: color & 0xFF
-	};
-
-	const hsv = {
-		h: Math.floor(rgb.r / 255 * 360),
-		s: Math.floor((Math.max(rgb.r, rgb.g, rgb.b) - Math.min(rgb.r, rgb.g, rgb.b)) / 255 * 100),
-		v: Math.floor((rgb.r + rgb.g + rgb.b) / 3 / 255 * 100)
-	}
-
-	const cmyk = {
-		c: Math.floor((1 - rgb.r / 255) * 100),
-		m: Math.floor((1 - rgb.g / 255) * 100),
-		y: Math.floor((1 - rgb.b / 255) * 100),
-		k: Math.floor((Math.min(rgb.r, rgb.g, rgb.b) / 255 * 100))
-	}
-
+export default async function GenerateColorEmbed(color: number): Promise<InteractionReplyOptions>
+{
+	const rgb = Color.numberToRGB(color);
+	const hsv = Color.RGBToHSV(rgb);
+	const cmyk = Color.RGBToCMYK(rgb);
 	const hex = color.toString(16).padStart(6, '0').toUpperCase();
 
-	const canvas = Canvas.createCanvas(300, 250);
-	const context = canvas.getContext('2d');
+	// Create color image
+	const canvas = Color.numberToImage(color);
 
-	context.fillStyle = `#${hex}`;
-	context.rect(0, 0, 300, 250);
-	context.fill();
-
-	context.textAlign = 'center';
-	context.font = '65px';
-	context.fillStyle = hsv.v / hsv.s < 0.5 ? '#ffffff' : '#000000';
-	context.fillText(`#${hex}`, 150, 150);
-
-
+	// Prepare attachment
 	const filename = `color-${hex}.png`
 	const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: filename });
 
 
+	// Return embed
 	return {
 		embeds: [{
 			title: `Color #${hex}`,
