@@ -21,7 +21,12 @@ import Canvas from '@napi-rs/canvas';
 
 export default class Color
 {
-	// https://www.w3.org/TR/WCAG20/#relativeluminancedef
+	/**
+	 * https://www.w3.org/TR/WCAG20/#relativeluminancedef
+	 * Determines the relative luminance of a given color code.
+	 * @param color The color code to determine the luminance from.
+	 * @returns A number between [0, 1].
+	 */
 	public static getRelativeLuminance(color: number): number
 	{
 		const rgb = Color.numberToRGB(color);
