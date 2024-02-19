@@ -16,7 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import Canvas from "@napi-rs/canvas";
+import Canvas from '@napi-rs/canvas';
 
 
 export default class Color
