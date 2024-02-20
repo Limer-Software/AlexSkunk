@@ -21,8 +21,8 @@ export const tableName = 'users';
 
 export interface User
 {
-	id: string,
-	coins: bigint
+	id: string;
+	coins: bigint;
 }
 
 
