@@ -16,15 +16,46 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Kysely } from 'kysely'
+import { Kysely, sql } from 'kysely'
 
 
 export async function up(db: Kysely<unknown>): Promise<void>
 {
-	// Migration code
+	// users
+	await db.schema
+		.createTable('users')
+		.addColumn('id', 'text', (c) => c.primaryKey())
+		.addColumn('coins', 'bigint', (c) => c.notNull().defaultTo(0))
+		.execute();
+
+	// user_spam_reports
+	await db.schema
+		.createTable('user_spam_reports')
+		.addColumn('id', 'uuid', c => c.primaryKey().defaultTo(sql`GEN_RANDOM_UUID()`))
+		.addColumn('victim', 'text', c => c.notNull())
+		.addColumn('attacker', 'text', c => c.notNull())
+		.addColumn('reason', 'text', c => c.notNull())
+		.addColumn('created_at', 'timestamp', c => c.notNull().defaultTo(sql`CURRENT_TIMESTAMP`))
+
+		.addForeignKeyConstraint('victim_fk', [ 'victim' ], 'users', [ 'id' ], fk => fk.onDelete('cascade'))
+		.addForeignKeyConstraint('attacker_fk', [ 'attacker' ], 'users', [ 'id' ], fk => fk.onDelete('cascade'))
+
+		.execute();
+
+	// for, eg, "reportsCount" in spam evaluation
+	await db.schema
+		.createIndex('user_spam_reports_idx')
+		.on('user_spam_reports')
+		.column('victim')
+		.execute();
+
 }
 
 export async function down(db: Kysely<unknown>): Promise<void>
 {
-	// Migration code
+	// users
+	await db.schema.dropTable('users').execute();
+
+	// user_spam_reports
+	await db.schema.dropTable('user_spam_reports').execute();
 }
