@@ -16,14 +16,17 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Kysely } from 'kysely';
 
-export const tableName = 'users';
-
-export interface User
-{
-	id: string;
-	coins: bigint;
-}
+import * as users from './tables/users';
+import * as userSpamReports from './tables/user_spam_reports';
 
 
-export type PartialDB = { [ tableName ]: User };
+export type DatabaseSchemaType = users.PartialDB &
+	userSpamReports.PartialDB;
+
+
+export type DatabaseSchema = Kysely<DatabaseSchemaType>;
+
+
+export default DatabaseSchema;

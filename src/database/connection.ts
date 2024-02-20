@@ -16,14 +16,23 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import PostgreSQL from 'pg';
+import { Pool } from 'pg';
+import { Kysely, PostgresDialect } from 'kysely';
+
+import DatabaseSchema, { DatabaseSchemaType } from './schema';
+
 
 class Database
 {
 	/**
 	 * Database connection pool
 	 */
-	private pool: PostgreSQL.Pool;
+	private pool: Pool;
+
+	/**
+	 * Kysely connection
+	 */
+	private db: DatabaseSchema;
 
 
 	/**
@@ -31,13 +40,16 @@ class Database
 	 */
 	constructor()
 	{
-		this.pool = new PostgreSQL.Pool({
+		this.pool = new Pool({
 			database: process.env.DB_NAME,
 			host: process.env.DB_HOST,
 			password: process.env.DB_PASSWORD,
 			port: Number.parseInt(process.env.DB_PORT),
 			user: process.env.DB_USER
 		});
+
+		const dialect = new PostgresDialect({ pool: this.pool });
+		this.db = new Kysely<DatabaseSchemaType>({ dialect });
 	}
 
 	/**
@@ -59,10 +71,10 @@ class Database
 	 * Get a client from the connection pool
 	 * @returns A client from the connection pool
 	 */
-	public async connect(): Promise<PostgreSQL.PoolClient>
-	{
-		return this.pool.connect();
-	}
+	// public async connect(): Promise<PoolClient>
+	// {
+	// 	return this.pool.connect();
+	// }
 }
 
 
