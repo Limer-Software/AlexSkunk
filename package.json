@@ -10,7 +10,7 @@
 		"build": "tsc",
 		"build:dev": "tsc -w",
 		"setup": "npm i && npm run build",
-		"migrate": "node-pg-migrate"
+		"migration:create": "ts-node ./bin/migration-create.ts"
 	},
 	"repository": {
 		"type": "git",
