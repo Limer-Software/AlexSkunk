@@ -25,7 +25,7 @@ export default async function startBot()
 	await import('./events/interactionCreate.js');
 
 	// Load commands
-	await import('./commands/index.js');
+	await import('./commands/loader.js');
 
 
 	// Login

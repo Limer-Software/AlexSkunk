@@ -44,7 +44,7 @@ subCommands.set(_random_.data.name, _random_);
 subCommands.set(_pick_.data.name, _pick_);
 
 
-const command: RSDiscord.RootCommand = {
+export const command: RSDiscord.RootCommand = {
 	data,
 	async execute(interaction)
 	{
@@ -59,5 +59,3 @@ const command: RSDiscord.RootCommand = {
 		await subcommand.execute(interaction);
 	}
 };
-
-export default command;
