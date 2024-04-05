@@ -50,7 +50,7 @@ data.addStringOption(option => {
 
 
 
-const command: RSDiscord.RootCommand = {
+export const command: RSDiscord.RootCommand = {
 	data,
 	async execute(interaction)
 	{
@@ -186,6 +186,3 @@ const command: RSDiscord.RootCommand = {
 		});
 	}
 };
-
-
-export default command;
