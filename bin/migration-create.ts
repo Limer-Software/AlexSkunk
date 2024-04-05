@@ -31,7 +31,7 @@ const now = new Date();
 
 const template = `/*
 	Alex Skunk, a discord bot.
-	Copyright (C) ${now.getFullYear()}  <name of author>
+	Copyright (C) ${now.getFullYear()} <name of author>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published
@@ -47,7 +47,7 @@ const template = `/*
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Kysely } from 'kysely'
+import { Kysely } from 'kysely';
 
 
 export async function up(db: Kysely<unknown>): Promise<void>

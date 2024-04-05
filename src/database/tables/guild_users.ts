@@ -17,17 +17,15 @@
 */
 
 
-export const tableName = 'user_spam_reports';
+export const tableName = 'guild_users';
 
-export interface UserSpamReport
+export interface GuildUsers
 {
-	id: string;
-	victim: string;
-	attacker: string;
-	reason: string;
-
-	created_at: Date;
+	user_id: string;
+	guild_id: string;
+	boop_count: number;
+	xp: number;
 }
 
 
-export type PartialDB = { [ tableName ]: UserSpamReport };
+export type PartialDB = { [ tableName ]: GuildUsers };
