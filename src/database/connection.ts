@@ -17,7 +17,7 @@
 */
 
 import { Pool } from 'pg';
-import { Kysely, Migrator, PostgresDialect } from 'kysely';
+import { Kysely, Migrator, PostgresDialect, sql } from 'kysely';
 
 import DatabaseSchema, { DatabaseSchemaType } from './schema';
 import { ContextMigrationProvider } from './migrations/provider';
@@ -71,18 +71,13 @@ class Database
 	public async testConnection(): Promise<void>
 	{
 		try {
-			// await this.pool.query('SELECT NOW()');
-
-			await this.db
-				.selectFrom('users')
-				.select([ b => b.fn.count('id').as('count') ])
-				.execute();
+			sql<string>`SELECT NOW()`;
 
 			console.log('Connected to database.');
+
 		} catch (error) {
-			console.error('Failed to connect to database.');
-			console.error(error);
-			process.exit(1);
+			console.error('An error ocurred while trying to test database connection.');
+			throw error;
 		}
 	}
 

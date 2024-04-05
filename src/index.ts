@@ -29,7 +29,16 @@ import startWebsite from './website/index';
 (async () =>
 {
 	client.database = new Database();
-	await client.database.testConnection();
+
+	try {
+		await client.database.tryMigrateToLatest();
+		await client.database.testConnection();
+
+	} catch (error) {
+		console.error(error);
+		process.exit(2);
+	}
+
 
 	await startBot();
 	await startWebsite();
