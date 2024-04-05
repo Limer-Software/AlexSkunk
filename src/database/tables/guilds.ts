@@ -17,25 +17,36 @@
 */
 
 
-export const tableName = 'users';
+export const tableName = 'guilds';
 
-export interface Users
+export interface Guilds
 {
 	id: string;
-	crypto_hash: string;
 
-	cached_name: string;
-	cached_avatar_url: string;
+	embeds_color?: number;
+	banner_buffer?: number;
+	reports_tolerance?: number;
+	settings: number;
+	captcha_verified_role?: string;
 
-	birthdate: Date;
+	xp_per_msg?: {
+		x: string,
+		y: string
+	};
+	xp_name_singular?: string;
+	xp_name_plural?: string;
+	xp_emoji?: string;
+	xp_levelup_messages?: string[];
 
-	ds_access_token?: string;
-	ds_refresh_token?: string;
-	ds_token_expires_at?: Date;
-	ds_token_scope?: string;
+	counter_index: number;
+	tickets_index: number;
 
-	is_admin?: boolean;
+	channel_counter?: string;
+	channel_log_roles?: string;
+	channel_log_messages?: string;
+	channel_log_joins?: string;
+	channel_log_message_filter?: string;
 }
 
 
-export type PartialDB = { [ tableName ]: Users };
+export type PartialDB = { [ tableName ]: Guilds };

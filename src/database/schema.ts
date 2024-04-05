@@ -19,11 +19,14 @@
 import { Kysely } from 'kysely';
 
 import * as users from './tables/users';
-import * as userSpamReports from './tables/user_spam_reports';
+import * as guildUsers from './tables/guild_users';
+import * as guilds from './tables/guilds';
 
 
-export type DatabaseSchemaType = users.PartialDB &
-	userSpamReports.PartialDB;
+export type DatabaseSchemaType =
+	users.PartialDB &
+	guildUsers.PartialDB &
+	guilds.PartialDB;
 
 
 export type DatabaseSchema = Kysely<DatabaseSchemaType>;
