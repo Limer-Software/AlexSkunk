@@ -89,7 +89,7 @@ export default class Color
 		context.fill();
 
 		context.textAlign = 'center';
-		context.font = '65px';
+		context.font = '65px "Roboto regular"';
 		context.fillStyle = luminance > 0.5 ? '#000000' : '#ffffff';
 		context.fillText(`#${hex.toUpperCase()}`, 150, 150);
 

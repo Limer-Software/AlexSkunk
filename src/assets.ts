@@ -16,28 +16,12 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import client from '../client';
+import { GlobalFonts } from '@napi-rs/canvas';
+
+import path from 'path';
 
 
-export default async function startBot()
-{
-	// Load assets
-	await import('../assets.js');
 
-	// Load events
-	await import('./events/interactionCreate.js');
+const fontsPath = path.join(process.cwd(), 'assets', 'fonts');
 
-	// Load commands
-	await import('./commands/loader.js');
-
-
-	// Login
-	try {
-		await client.login(process.env.TOKEN);
-		console.log('Connected to Discord.');
-
-	} catch (error) {
-		console.error(error);
-		process.exit(2);
-	}
-}
+GlobalFonts.registerFromPath(path.join(fontsPath, 'Roboto_Regular.ttf'), 'Roboto regular');
