@@ -16,7 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export default async function startWebsite()
+export default async function startAPI()
 {
-	console.log('Website launched.');
+	console.log('API launched.');
 }

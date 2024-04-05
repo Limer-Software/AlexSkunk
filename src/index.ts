@@ -23,7 +23,7 @@ import Database from './database/connection';
 import client from './client';
 
 import startBot from './bot/index';
-import startWebsite from './website/index';
+import startAPI from './api/index';
 
 
 (async () =>
@@ -41,5 +41,5 @@ import startWebsite from './website/index';
 
 
 	await startBot();
-	await startWebsite();
+	await startAPI();
 })();
