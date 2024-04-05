@@ -15,3 +15,19 @@
 	You should have received a copy of the GNU Affero General Public License
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
+
+export const tableName = 'user_spam_reports';
+
+export interface UserSpamReport
+{
+	id: string;
+	victim: string;
+	attacker: string;
+	reason: string;
+
+	created_at: Date;
+}
+
+
+export type PartialDB = { [ tableName ]: UserSpamReport };

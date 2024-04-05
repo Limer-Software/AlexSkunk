@@ -16,30 +16,4 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'source-map-support/register';
-import './env';
-
-import Database from './database/connection';
-import client from './client';
-
-import startBot from './bot/index';
-import startWebsite from './website/index';
-
-
-(async () =>
-{
-	client.database = new Database();
-
-	try {
-		await client.database.tryMigrateToLatest();
-		await client.database.testConnection();
-
-	} catch (error) {
-		console.error(error);
-		process.exit(2);
-	}
-
-
-	await startBot();
-	await startWebsite();
-})();
+export * as _20240220T015258655Z from './20240220T015258655Z-init';

@@ -16,30 +16,17 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'source-map-support/register';
-import './env';
+import { Kysely } from 'kysely';
 
-import Database from './database/connection';
-import client from './client';
-
-import startBot from './bot/index';
-import startWebsite from './website/index';
+import * as users from './tables/users';
+import * as userSpamReports from './tables/user_spam_reports';
 
 
-(async () =>
-{
-	client.database = new Database();
-
-	try {
-		await client.database.tryMigrateToLatest();
-		await client.database.testConnection();
-
-	} catch (error) {
-		console.error(error);
-		process.exit(2);
-	}
+export type DatabaseSchemaType = users.PartialDB &
+	userSpamReports.PartialDB;
 
 
-	await startBot();
-	await startWebsite();
-})();
+export type DatabaseSchema = Kysely<DatabaseSchemaType>;
+
+
+export default DatabaseSchema;

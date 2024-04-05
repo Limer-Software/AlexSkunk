@@ -16,30 +16,14 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'source-map-support/register';
-import './env';
 
-import Database from './database/connection';
-import client from './client';
+export const tableName = 'users';
 
-import startBot from './bot/index';
-import startWebsite from './website/index';
-
-
-(async () =>
+export interface Users
 {
-	client.database = new Database();
-
-	try {
-		await client.database.tryMigrateToLatest();
-		await client.database.testConnection();
-
-	} catch (error) {
-		console.error(error);
-		process.exit(2);
-	}
+	id: string;
+	coins: bigint;
+}
 
 
-	await startBot();
-	await startWebsite();
-})();
+export type PartialDB = { [ tableName ]: Users };

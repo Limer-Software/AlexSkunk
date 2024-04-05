@@ -16,14 +16,31 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import PostgreSQL from 'pg';
+import { Pool } from 'pg';
+import { Kysely, Migrator, PostgresDialect, sql } from 'kysely';
+
+import DatabaseSchema, { DatabaseSchemaType } from './schema';
+import { ContextMigrationProvider } from './migrations/provider';
+
+import * as migrations from './migrations';
+
 
 class Database
 {
 	/**
 	 * Database connection pool
 	 */
-	private pool: PostgreSQL.Pool;
+	private pool: Pool;
+
+	/**
+	 * Kysely connection
+	 */
+	private db: DatabaseSchema;
+
+	/**
+	 * Kysely migrator
+	 */
+	private migrator: Migrator;
 
 
 	/**
@@ -31,13 +48,21 @@ class Database
 	 */
 	constructor()
 	{
-		this.pool = new PostgreSQL.Pool({
+		this.pool = new Pool({
 			database: process.env.DB_NAME,
 			host: process.env.DB_HOST,
 			password: process.env.DB_PASSWORD,
 			port: Number.parseInt(process.env.DB_PORT),
-			user: process.env.DB_USER
+			user: process.env.DB_USER,
 		});
+
+		const dialect = new PostgresDialect({ pool: this.pool });
+		this.db = new Kysely<DatabaseSchemaType>({ dialect });
+
+		this.migrator = new Migrator({
+			db: this.db,
+			provider: new ContextMigrationProvider(migrations, 'pg')
+		})
 	}
 
 	/**
@@ -46,23 +71,62 @@ class Database
 	public async testConnection(): Promise<void>
 	{
 		try {
-			await this.pool.query('SELECT NOW()');
+			sql<string>`SELECT NOW()`;
+
 			console.log('Connected to database.');
+
 		} catch (error) {
-			console.error('Failed to connect to database.');
-			console.error(error);
-			process.exit(1);
+			console.error('An error ocurred while trying to test database connection.');
+			throw error;
 		}
+	}
+
+
+	/**
+	 * Just a wrapper of migrateTo but with try/catch compatibility.
+	 */
+	public async tryMigrateTo(migration: string)
+	{
+		const { error, results } = await this.migrator.migrateTo(migration);
+		
+		if (error) {
+			throw error;
+		}
+
+		if (!results) {
+			throw new Error('An unknown error ocurred while migrating.');
+		}
+
+		return results;
+	}
+
+
+	/**
+	 * Just a wrapper of migrateToLatest but with try/catch compatibility.
+	 */
+	public async tryMigrateToLatest()
+	{
+		const { error, results } = await this.migrator.migrateToLatest();
+		
+		if (error) {
+			throw error;
+		}
+
+		if (!results) {
+			throw new Error('An unknown error ocurred while migrating.');
+		}
+
+		return results;
 	}
 
 	/**
 	 * Get a client from the connection pool
 	 * @returns A client from the connection pool
 	 */
-	public async connect(): Promise<PostgreSQL.PoolClient>
-	{
-		return this.pool.connect();
-	}
+	// public async connect(): Promise<PoolClient>
+	// {
+	// 	return this.pool.connect();
+	// }
 }
 
 
