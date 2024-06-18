@@ -41,7 +41,7 @@
 	},
 	"dependencies": {
 		"@napi-rs/canvas": "^0.1.51",
-		"discord.js": "^14.14.1",
+		"discord.js": "^14.15.3",
 		"dotenv": "^16.4.5",
 		"kysely": "^0.27.3",
 		"node-pg-migrate": "^6.2.2",
